@@ -17,23 +17,23 @@ public class jmxTest {
 	private static JMXConnector connector;
 
 	public static void Connection(String hostname, String port) throws IOException {
-        //EAP 7x | Wildfly 10+ 
-		String urlString =
-            System.getProperty("jmx.service.url","service:jmx:remote+http://" + hostname + ":" + port);
-        JMXServiceURL serviceURL = new JMXServiceURL(urlString);
-        Map<String, String[]> map = new HashMap<>();
-        //credential user should previously exists in EAP/Wildfly environment (using $JBOSS-HOME/bin/add-user.sh)
-        String[] credentials = new String[2];
-        credentials[0] = "admin";
-        credentials[1] = "admin";
-        map.put(JMXConnector.CREDENTIALS, credentials);
-        
-        //passing server credentials 
-        JMXConnector jmxConnector = JMXConnectorFactory.connect(serviceURL, map);
-        //omitting server credentials
-        //JMXConnector jmxConnector = JMXConnectorFactory.connect(serviceURL, null);
-        
-        connection = jmxConnector.getMBeanServerConnection();
+		// EAP 7x | Wildfly 10+
+		String urlString = System.getProperty("jmx.service.url", "service:jmx:remote+http://" + hostname + ":" + port);
+		JMXServiceURL serviceURL = new JMXServiceURL(urlString);
+		Map<String, String[]> map = new HashMap<>();
+		// credential user should previously exists in EAP/Wildfly environment (using
+		// $JBOSS-HOME/bin/add-user.sh)
+		String[] credentials = new String[2];
+		credentials[0] = "admin";
+		credentials[1] = "admin";
+		map.put(JMXConnector.CREDENTIALS, credentials);
+
+		// passing server credentials
+		JMXConnector jmxConnector = JMXConnectorFactory.connect(serviceURL, map);
+		// omitting server credentials
+		// JMXConnector jmxConnector = JMXConnectorFactory.connect(serviceURL, null);
+
+		connection = jmxConnector.getMBeanServerConnection();
 	}
 
 	private static void getHeapMemoryUsage() throws Exception {
