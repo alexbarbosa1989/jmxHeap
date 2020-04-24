@@ -15,6 +15,7 @@ public class jmxTest {
 
 	private static MBeanServerConnection connection;
 	private static JMXConnector connector;
+	private static int mem = (int) Math.pow(1024,2);
 
 	public static void Connection(String hostname, String port) throws IOException {
 		// EAP 7x | Wildfly 10+
@@ -62,10 +63,10 @@ public class jmxTest {
 			Long max = (Long) dataSenders.get("max");
 			Long used = (Long) dataSenders.get("used");
 			Long percentage = ((used * 100) / max);
-			System.out.println("commited   : " + commited / (1024 * 1024) + " MB");
-			System.out.println("init       : " + init / (1024 * 1024) + " MB");
-			System.out.println("max        : " + max / (1024 * 1024) + " MB");
-			System.out.println("used       : " + used / (1024 * 1024) + " MB");
+			System.out.println("commited   : " + commited / mem + " MB");
+			System.out.println("init       : " + init / mem + " MB");
+			System.out.println("max        : " + max / mem + " MB");
+			System.out.println("used       : " + used / mem + " MB");
 			System.out.println("percentage : " + percentage + " %");
 		}
 	}
@@ -82,16 +83,16 @@ public class jmxTest {
 		Long totalSwapSpaceSize = (Long) connection.getAttribute(OSTemMXBean, "TotalSwapSpaceSize");
 
 		System.out.println("OS LoadAverage: " + systemLoadAverage);
-		System.out.println("OS FreePhysicalMemory: " + (freePhysicalMemory / (1024 * 1024)) + "-MB");
+		System.out.println("OS FreePhysicalMemory: " + (freePhysicalMemory / mem) + "-MB");
 		System.out.println("OS processCpuTime: " + processCpuTime);
 		System.out.println("OS committedVirtualMemorySize: " + (committedVirtualMemorySize / (1024 * 1024)) + "-MB");
-		System.out.println("OS freeSwapSpaceSize: " + (freeSwapSpaceSize / (1024 * 1024)) + "-MB");
-		System.out.println("OS totalPhysicalMemorySize: " + (totalPhysicalMemorySize / (1024 * 1024)) + "-MB");
-		System.out.println("OS totalSwapSpaceSize: " + (totalSwapSpaceSize / (1024 * 1024)) + "-MB");
+		System.out.println("OS freeSwapSpaceSize: " + (freeSwapSpaceSize / mem) + "-MB");
+		System.out.println("OS totalPhysicalMemorySize: " + (totalPhysicalMemorySize / mem) + "-MB");
+		System.out.println("OS totalSwapSpaceSize: " + (totalSwapSpaceSize / mem) + "-MB");
 	}
 
 	public static void main(String[] args) throws Exception {
-		//Get a connection to the WildFly MBean server
+		//Get a connection to the WildFly/EAP MBean server
 		String hostname =  "127.0.0.1";
 		String port =  "9990";
 		//to get the connection the jboss-cli.jar should exists in the CLASSPATH
