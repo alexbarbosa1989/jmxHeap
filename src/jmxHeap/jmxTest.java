@@ -103,9 +103,6 @@ public class jmxTest {
 		getNonHeapMemoryUsage();
 		System.out.println("----------Operating System Usage---------");
 		getOSDetails();
-		ObjectName var1= new ObjectName("jboss.as:socket-binding-group=standard-sockets,socket-binding=http");
-		Integer var2 = (Integer) connection.getAttribute(var1, "port");
-		System.out.println("port test"+ var2);
 		connector.close();
 	}
 	
