@@ -15,9 +15,11 @@ git clone https://github.com/alexbarbosa1989/jmxHeap
 ~~~
 $ tree .
 .
+├── README.md
 └── src
     └── jmxHeap
         └── jmxTest.java
+
 ~~~
 
 3. navigate into the src/ directory
@@ -37,6 +39,7 @@ javac -classpath .:${CLIENT-PATH}/jboss-client.jar jmxHeap/jmxTest.java
 ~~~
 $ tree .
 .
+├── README.md
 └── src
     └── jmxHeap
         ├── jmxTest.class
