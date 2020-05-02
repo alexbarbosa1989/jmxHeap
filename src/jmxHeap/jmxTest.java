@@ -19,7 +19,7 @@ public class jmxTest {
 
 	public static void Connection(String hostname, String port) throws IOException {
 		// EAP 7x | Wildfly 10+
-		String urlString = System.getProperty("jmx.service.url", "service:jmx:remote+http://" + hostname + ":" + port);
+		String urlString = "service:jmx:remote+http://" + hostname + ":" + port;
 		JMXServiceURL serviceURL = new JMXServiceURL(urlString);
 		Map<String, String[]> map = new HashMap<>();
 		// credential user should previously exists in EAP/Wildfly environment (using
@@ -95,7 +95,7 @@ public class jmxTest {
 		//Get a connection to the WildFly/EAP MBean server
 		String hostname =  "127.0.0.1";
 		String port =  "9990";
-		//to get the connection the jboss-cli.jar should exists in the CLASSPATH
+		//to get the connection the jboss-client.jar should exists in the CLASSPATH
 		Connection(hostname, port);
 		System.out.println("----------HEAP Memory Usage---------");
 		getHeapMemoryUsage();
@@ -103,7 +103,11 @@ public class jmxTest {
 		getNonHeapMemoryUsage();
 		System.out.println("----------Operating System Usage---------");
 		getOSDetails();
+		ObjectName var1= new ObjectName("jboss.as:socket-binding-group=standard-sockets,socket-binding=http");
+		Integer var2 = (Integer) connection.getAttribute(var1, "port");
+		System.out.println("port test"+ var2);
 		connector.close();
 	}
+	
 
 }
