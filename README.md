@@ -1,6 +1,6 @@
 # jmxHeap
 JBoss EAP jmx basic client
-
+Maven compiled version repo: https://github.com/alexbarbosa1989/jmxHeapMaven
 
 USAGE
 
